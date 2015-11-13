@@ -12,10 +12,10 @@ namespace Bll
     using System;
     using System.Collections.Generic;
     
-    public partial class EVENT
+    public partial class EVENTS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EVENT()
+        public EVENTS()
         {
             this.CATEGORY = new HashSet<CATEGORY>();
         }

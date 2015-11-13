@@ -26,8 +26,8 @@ namespace Bll
         public Nullable<int> PRICE { get; set; }
         public string NUM_OF_TICKET { get; set; }
     
-        public virtual EVENT EVENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RESERVE_DB> RESERVE_DB { get; set; }
+        public virtual EVENTS EVENTS { get; set; }
     }
 }
