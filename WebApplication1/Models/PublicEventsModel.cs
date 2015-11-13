@@ -15,6 +15,7 @@ namespace WebApplication1.Models
 
     }
 
+
     public class EventDBContext : DbContext
     {
         public DbSet<PublicEventsModel> Events { get; set; }

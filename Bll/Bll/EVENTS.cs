@@ -14,18 +14,9 @@ namespace Bll
     
     public partial class EVENTS
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EVENTS()
-        {
-            this.CATEGORY = new HashSet<CATEGORY>();
-        }
-    
         public int EVENT_ID { get; set; }
         public string NAME { get; set; }
         public int DATE { get; set; }
         public Nullable<int> NUM_OF_TICKET { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CATEGORY> CATEGORY { get; set; }
     }
 }

@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EventDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CATEGORY">
-          <Key>
-            <PropertyRef Name="TIC_CAT_ID" />
-          </Key>
-          <Property Name="TIC_CAT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EVENT_ID" Type="int" Nullable="false" />
-          <Property Name="CAT_NAME" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PRICE" Type="int" />
-          <Property Name="NUM_OF_TICKET" Type="nchar" MaxLength="10" />
-        </EntityType>
         <EntityType Name="EVENTS">
           <Key>
             <PropertyRef Name="EVENT_ID" />
@@ -24,100 +14,15 @@
           <Property Name="DATE" Type="int" Nullable="false" />
           <Property Name="NUM_OF_TICKET" Type="int" />
         </EntityType>
-        <EntityType Name="RESERVE_DB">
-          <Key>
-            <PropertyRef Name="RESERVE_ID" />
-          </Key>
-          <Property Name="RESERVE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TIC_CAT_ID" Type="int" Nullable="false" />
-          <Property Name="USER_ID" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_CATEGORY_EVENT">
-          <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="1" />
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EVENTS">
-              <PropertyRef Name="EVENT_ID" />
-            </Principal>
-            <Dependent Role="CATEGORY">
-              <PropertyRef Name="EVENT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RESERVE_DB_CATEGORY">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
-          <End Role="RESERVE_DB" Type="Self.RESERVE_DB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORY">
-              <PropertyRef Name="TIC_CAT_ID" />
-            </Principal>
-            <Dependent Role="RESERVE_DB">
-              <PropertyRef Name="TIC_CAT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="EventDBModelStoreContainer">
-          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EVENTS" EntityType="Self.EVENTS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RESERVE_DB" EntityType="Self.RESERVE_DB" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_CATEGORY_EVENT" Association="Self.FK_CATEGORY_EVENT">
-            <End Role="EVENTS" EntitySet="EVENTS" />
-            <End Role="CATEGORY" EntitySet="CATEGORY" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RESERVE_DB_CATEGORY" Association="Self.FK_RESERVE_DB_CATEGORY">
-            <End Role="CATEGORY" EntitySet="CATEGORY" />
-            <End Role="RESERVE_DB" EntitySet="RESERVE_DB" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CATEGORY">
-          <Key>
-            <PropertyRef Name="TIC_CAT_ID" />
-          </Key>
-          <Property Name="TIC_CAT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EVENT_ID" Type="Int32" Nullable="false" />
-          <Property Name="CAT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PRICE" Type="Int32" />
-          <Property Name="NUM_OF_TICKET" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="RESERVE_DB" Relationship="Self.FK_RESERVE_DB_CATEGORY" FromRole="CATEGORY" ToRole="RESERVE_DB" />
-          <NavigationProperty Name="EVENTS" Relationship="EventDBModel.FK_CATEGORY_EVENT" FromRole="CATEGORY" ToRole="EVENTS" />
-        </EntityType>
-        <EntityType Name="RESERVE_DB">
-          <Key>
-            <PropertyRef Name="RESERVE_ID" />
-          </Key>
-          <Property Name="RESERVE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TIC_CAT_ID" Type="Int32" Nullable="false" />
-          <Property Name="USER_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CATEGORY" Relationship="Self.FK_RESERVE_DB_CATEGORY" FromRole="RESERVE_DB" ToRole="CATEGORY" />
-        </EntityType>
-        <Association Name="FK_RESERVE_DB_CATEGORY">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
-          <End Role="RESERVE_DB" Type="Self.RESERVE_DB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORY">
-              <PropertyRef Name="TIC_CAT_ID" />
-            </Principal>
-            <Dependent Role="RESERVE_DB">
-              <PropertyRef Name="TIC_CAT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="EventDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" />
-          <EntitySet Name="RESERVE_DB" EntityType="Self.RESERVE_DB" />
-          <AssociationSet Name="FK_RESERVE_DB_CATEGORY" Association="Self.FK_RESERVE_DB_CATEGORY">
-            <End Role="CATEGORY" EntitySet="CATEGORY" />
-            <End Role="RESERVE_DB" EntitySet="RESERVE_DB" />
-          </AssociationSet>
           <EntitySet Name="EVENTS" EntityType="EventDBModel.EVENTS" />
-          <AssociationSet Name="FK_CATEGORY_EVENT" Association="EventDBModel.FK_CATEGORY_EVENT">
-            <End Role="EVENTS" EntitySet="EVENTS" />
-            <End Role="CATEGORY" EntitySet="CATEGORY" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="EVENTS">
           <Key>
@@ -127,46 +32,13 @@
           <Property Name="NAME" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DATE" Type="Int32" Nullable="false" />
           <Property Name="NUM_OF_TICKET" Type="Int32" />
-          <NavigationProperty Name="CATEGORY" Relationship="EventDBModel.FK_CATEGORY_EVENT" FromRole="EVENTS" ToRole="CATEGORY" />
         </EntityType>
-        <Association Name="FK_CATEGORY_EVENT">
-          <End Type="EventDBModel.EVENTS" Role="EVENTS" Multiplicity="1" />
-          <End Type="EventDBModel.CATEGORY" Role="CATEGORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EVENTS">
-              <PropertyRef Name="EVENT_ID" />
-            </Principal>
-            <Dependent Role="CATEGORY">
-              <PropertyRef Name="EVENT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EventDBModelStoreContainer" CdmEntityContainer="EventDBEntities">
-          <EntitySetMapping Name="CATEGORY">
-            <EntityTypeMapping TypeName="EventDBModel.CATEGORY">
-              <MappingFragment StoreEntitySet="CATEGORY">
-                <ScalarProperty Name="TIC_CAT_ID" ColumnName="TIC_CAT_ID" />
-                <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
-                <ScalarProperty Name="CAT_NAME" ColumnName="CAT_NAME" />
-                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
-                <ScalarProperty Name="NUM_OF_TICKET" ColumnName="NUM_OF_TICKET" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RESERVE_DB">
-            <EntityTypeMapping TypeName="EventDBModel.RESERVE_DB">
-              <MappingFragment StoreEntitySet="RESERVE_DB">
-                <ScalarProperty Name="RESERVE_ID" ColumnName="RESERVE_ID" />
-                <ScalarProperty Name="TIC_CAT_ID" ColumnName="TIC_CAT_ID" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EVENTS">
             <EntityTypeMapping TypeName="EventDBModel.EVENTS">
               <MappingFragment StoreEntitySet="EVENTS">

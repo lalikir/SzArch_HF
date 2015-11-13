@@ -51,13 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CATEGORY.cs">
-      <DependentUpon>EventDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DTO\EventHeaderData.cs" />
-    <Compile Include="EVENT.cs">
-      <DependentUpon>EventDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EventDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -74,10 +68,10 @@
       <DependentUpon>EventDbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="EventManager.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RESERVE_DB.cs">
+    <Compile Include="EVENTS.cs">
       <DependentUpon>EventDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EventDbModel.edmx">

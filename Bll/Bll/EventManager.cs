@@ -14,7 +14,7 @@ namespace Bll
         {
             using (var context = new EventDBEntities())
             {
-                var allEvent = (from p in context.EVENT
+                var allEvent = (from p in context.EVENTS
                                   select new EventHeaderData
                                   {
                                       Id = p.EVENT_ID,

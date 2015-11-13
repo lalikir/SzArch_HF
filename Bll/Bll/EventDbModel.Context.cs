@@ -25,8 +25,6 @@ namespace Bll
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CATEGORY> CATEGORY { get; set; }
-        public virtual DbSet<RESERVE_DB> RESERVE_DB { get; set; }
         public virtual DbSet<EVENTS> EVENTS { get; set; }
     }
 }
