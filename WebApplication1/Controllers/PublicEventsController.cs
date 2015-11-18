@@ -13,8 +13,8 @@ namespace WebApplication1.Controllers
         // GET: PublicEvents
         public ActionResult Index()
         {
-            var model = new Bll.EventManager().GetAllEvent();
-            return View(model);
+            //var model = new Bll.EventManager().GetAllEvent();
+            return View(new Bll.EventManager().GetAllEvent());
         }
 
         // GET: PublicEvents/Details/5
